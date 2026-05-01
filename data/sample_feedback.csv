@@ -1,0 +1,51 @@
+student_id,feedback_text,category,date,rating,department,campus
+STU001,The library is extremely noisy and it's hard to study. The quiet zones are overcrowded during peak hours.,Facilities,2026-04-25,2,Engineering,Main Campus
+STU002,Excellent teaching quality! Professor Reyes explains concepts very clearly and engages the class well.,Teaching Quality,2026-04-25,5,Arts & Sciences,Main Campus
+STU003,The WiFi in the academic buildings keeps disconnecting. Very frustrating for online submissions.,Infrastructure,2026-04-26,2,Information Technology,Main Campus
+STU004,Student services office was very helpful in resolving my enrollment issues. Great support!,Student Services,2026-04-26,5,Business,Main Campus
+STU005,The air conditioning in Building A is not working properly. It's very hot during afternoon classes.,Facilities,2026-04-26,1,Engineering,Main Campus
+STU006,The cafeteria food quality has improved. More vegetarian options would be appreciated.,Administrative Services,2026-04-27,3,Arts & Sciences,Main Campus
+STU007,The parking lot is always full. Need more parking spaces for students.,Facilities,2026-04-27,2,Business,Dasmariñas
+STU008,Lab equipment is outdated and frequently breaks down. We need new equipment for practical sessions.,Facilities,2026-04-27,1,Engineering,Main Campus
+STU009,Teaching quality is outstanding! Professors are knowledgeable and approachable during office hours.,Teaching Quality,2026-04-28,5,Arts & Sciences,Main Campus
+STU010,The registrar's office processes documents slowly. Had to wait 3 weeks for my transcript.,Administrative Services,2026-04-28,2,Business,Main Campus
+STU011,Library extended hours would help students who have evening classes. Currently closes at 9 PM.,Student Services,2026-04-28,3,Engineering,Main Campus
+STU012,Excellent facilities! Clean buildings, well-maintained classrooms, and modern computer labs.,Facilities,2026-04-29,5,Information Technology,Main Campus
+STU013,The internet bandwidth is insufficient during exams. Too many students competing for connection.,Infrastructure,2026-04-29,2,Engineering,Main Campus
+STU014,Teaching quality varies widely. Some professors are inspiring, others are disengaged and read from slides.,Teaching Quality,2026-04-29,3,Arts & Sciences,Main Campus
+STU015,Student counseling services are understaffed. Had to wait 2 months for an appointment.,Student Services,2026-04-29,1,Business,Main Campus
+STU016,The campus is very clean and well-organized. Great maintenance team!,Facilities,2026-04-30,5,Arts & Sciences,Dasmariñas
+STU017,WiFi connection is stable and fast. Much better than last year!,Infrastructure,2026-04-30,4,Information Technology,Main Campus
+STU018,The quality of teaching has improved significantly this semester. More interactive classes.,Teaching Quality,2026-04-30,4,Engineering,Main Campus
+STU019,Admissions office staff were rude when I called about my application status.,Administrative Services,2026-04-30,1,Business,Main Campus
+STU020,The library has excellent collection of books and databases. Very helpful for research.,Facilities,2026-05-01,5,Arts & Sciences,Main Campus
+STU021,Classroom air conditioning needs repair. Some rooms are freezing, others are too hot.,Facilities,2026-05-01,2,Engineering,Main Campus
+STU022,Great support from student affairs! They organized amazing events and activities this year.,Student Services,2026-05-01,5,Business,Main Campus
+STU023,Teaching methods are outdated. More use of modern technology would help.,Teaching Quality,2026-05-01,2,Arts & Sciences,Main Campus
+STU024,The commuter shuttle service is very helpful and runs on schedule.,Administrative Services,2026-05-01,4,Engineering,Main Campus
+STU025,Internet speed is slow during midterm and final exam periods.,Infrastructure,2026-05-01,2,Information Technology,Main Campus
+STU026,Facilities are generally good but some restrooms need cleaning more frequently.,Facilities,2026-05-01,3,Business,Main Campus
+STU027,Professors are very supportive and provide constructive feedback on assignments.,Teaching Quality,2026-05-01,5,Arts & Sciences,Main Campus
+STU028,The bookstore prices are too high compared to other universities.,Administrative Services,2026-05-01,2,Business,Main Campus
+STU029,Campus infrastructure is impressive. New buildings look great!,Facilities,2026-05-01,4,Engineering,Main Campus
+STU030,Very responsive student services team. They resolved my issue within 24 hours.,Student Services,2026-05-01,5,Business,Main Campus
+STU031,The WiFi occasionally drops. Should investigate the router placement.,Infrastructure,2026-05-01,3,Arts & Sciences,Main Campus
+STU032,Some classrooms lack proper lighting and make it hard to see the board.,Facilities,2026-05-01,2,Engineering,Main Campus
+STU033,Teaching quality depends on the instructor. Some are excellent, others need improvement.,Teaching Quality,2026-05-01,3,Business,Main Campus
+STU034,Student health services are limited. Need more doctors available especially during flu season.,Student Services,2026-05-01,2,Arts & Sciences,Main Campus
+STU035,Parking fee is reasonable but lot is always full by 9 AM.,Facilities,2026-05-01,3,Business,Dasmariñas
+STU036,The campus is well-equipped with modern facilities and technology.,Facilities,2026-05-01,5,Information Technology,Main Campus
+STU037,Professors use engaging teaching methods and make concepts clear and understandable.,Teaching Quality,2026-05-01,5,Engineering,Main Campus
+STU038,Administrative processes are complicated and there's lack of clear communication.,Administrative Services,2026-05-01,1,Business,Main Campus
+STU039,Great campus environment! Landscaping is beautiful and peaceful.,Facilities,2026-05-01,5,Arts & Sciences,Main Campus
+STU040,Internet bandwidth is insufficient during peak hours causing slow connections.,Infrastructure,2026-05-01,1,Engineering,Main Campus
+STU041,Teaching assistants are helpful but some lack expertise in their subject areas.,Teaching Quality,2026-05-01,3,Information Technology,Main Campus
+STU042,Student services website is confusing and hard to navigate to find needed information.,Administrative Services,2026-05-01,2,Business,Main Campus
+STU043,The library renovations look excellent. Much improved study areas and seating.,Facilities,2026-05-01,5,Arts & Sciences,Main Campus
+STU044,WiFi in dorm rooms frequently disconnects making online learning difficult.,Infrastructure,2026-05-01,1,Engineering,Main Campus
+STU045,Class sizes are too large making it hard for professors to provide individual attention.,Teaching Quality,2026-05-01,2,Business,Main Campus
+STU046,Student feedback system is great! Happy to see university is taking our input seriously.,Administrative Services,2026-05-01,5,Arts & Sciences,Main Campus
+STU047,The campus emergency alert system gives fast notifications. Appreciated.,Administrative Services,2026-05-01,4,Engineering,Main Campus
+STU048,Lab facilities are well-maintained and regularly updated with new equipment.,Facilities,2026-05-01,5,Information Technology,Main Campus
+STU049,Teaching quality would improve if there were smaller class sizes for better interaction.,Teaching Quality,2026-05-01,3,Arts & Sciences,Main Campus
+STU050,Campus security staff are professional and responsive to concerns. Feel safe on campus.,Administrative Services,2026-05-01,5,Business,Main Campus
