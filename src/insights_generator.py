@@ -16,6 +16,9 @@ INSIGHT_TEMPLATES = {
         "Positive feedback: {entity}. Recommended action: Continue maintenance standards for {category_focus}.",
         "Strength identified: {entity}. Suggestion: Document best practices and maintain current facility standards.",
     ],
+    ("Facilities", "NEUTRAL"): [
+        "Neutral feedback noted regarding {category_focus}: {entity}. Recommended action: Monitor similar feedback before taking major action.",
+    ],
     ("Teaching Quality", "NEGATIVE"): [
         "Teaching concern: {entity}. Recommended action: Provide professional development workshops for faculty.",
         "Issue noted: {entity}. Suggested action: Review course design and implement student-centered teaching methods.",
@@ -24,6 +27,9 @@ INSIGHT_TEMPLATES = {
     ("Teaching Quality", "POSITIVE"): [
         "Excellent teaching practice noted: {entity}. Recommendation: Recognize and reward outstanding faculty.",
         "Strength: {entity}. Suggested action: Use as model for faculty development programs.",
+    ],
+    ("Teaching Quality", "NEUTRAL"): [
+        "Neutral teaching-related feedback noted: {entity}. Recommended action: Review if similar comments appear repeatedly.",
     ],
     ("Student Services", "NEGATIVE"): [
         "Service gap identified: {entity}. Recommended action: Increase staffing and resources for {category_focus}.",
@@ -34,6 +40,9 @@ INSIGHT_TEMPLATES = {
         "Positive feedback: {entity}. Recommendation: Continue excellent service delivery.",
         "Strength identified: {entity}. Suggested action: Maintain current service excellence.",
     ],
+    ("Student Services", "NEUTRAL"): [
+        "Neutral student services feedback noted: {entity}. Recommended action: Track recurring mentions for possible improvement.",
+    ],
     ("Infrastructure", "NEGATIVE"): [
         "Infrastructure issue: {entity}. Recommended action: IT department should investigate and upgrade {category_focus} systems.",
         "Problem identified: {entity}. Suggestion: Conduct IT audit and implement infrastructure improvements.",
@@ -41,6 +50,9 @@ INSIGHT_TEMPLATES = {
     ],
     ("Infrastructure", "POSITIVE"): [
         "Infrastructure strength: {entity}. Recommendation: Maintain current systems and plan for future scalability.",
+    ],
+     ("Infrastructure", "NEUTRAL"): [
+        "Neutral infrastructure feedback noted: {entity}. Recommended action: Monitor system-related comments for recurring patterns.",
     ],
     ("Administrative Services", "NEGATIVE"): [
         "Administrative process issue: {entity}. Recommended action: Streamline {category_focus} procedures.",
@@ -50,11 +62,17 @@ INSIGHT_TEMPLATES = {
     ("Administrative Services", "POSITIVE"): [
         "Positive feedback: {entity}. Recommendation: Continue excellent administrative service.",
     ],
+    ("Administrative Services", "NEUTRAL"): [
+        "Neutral administrative feedback noted: {entity}. Recommended action: Observe if this becomes a recurring concern.",
+    ],
     ("Other", "NEGATIVE"): [
         "Issue noted: {entity}. Recommendation: Investigate and take appropriate action.",
     ],
     ("Other", "POSITIVE"): [
         "Positive feedback: {entity}. Recommendation: Continue supporting student experience.",
+    ],
+     ("Other", "NEUTRAL"): [
+        "Neutral or low-information feedback received: {entity}. Recommended action: No immediate action needed; collect more detailed feedback if repeated.",
     ],
 }
 
@@ -103,7 +121,10 @@ def generate_insight(feedback_data: Dict) -> Dict[str, any]:
     
     # Extract entities/problems
     entities = _extract_key_entities(text, topic)
-    entity_str = entities[0] if entities else "improvement needed"
+    if sentiment == "NEUTRAL" and "low_information" in feedback_data.get("emotion_tags", []):
+        entity_str = "brief feedback with limited context"
+    else:
+        entity_str = entities[0] if entities else "general feedback"
     
     # Format insight
     insight_text = template.format(
