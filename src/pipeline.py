@@ -61,9 +61,14 @@ def process_feedback_batch(df: pd.DataFrame) -> Tuple[pd.DataFrame, List[Dict], 
         
         # Step 4: Generate Insight
         insight = generate_insight(combined_data)
-        
+
+        # Attach a stable feedback_id so insights can still be matched
+        # to the correct DataFrame row even after priority ranking.
+        insight["feedback_id"] = idx
+
         # Create enriched row
         enriched_row = row.copy()
+        enriched_row["feedback_id"] = idx
         enriched_row["sentiment"] = sentiment_result["sentiment_label"]
         enriched_row["sentiment_confidence"] = sentiment_result["confidence"]
         enriched_row["emotion_tags"] = ", ".join(sentiment_result["emotion_tags"])
@@ -175,16 +180,27 @@ def filter_insights(
     # Filter by date range
     if "date_range" in filters and filters["date_range"]:
         start_date, end_date = filters["date_range"]
-        filtered_df["date"] = pd.to_datetime(filtered_df["date"])
+
+        # Convert both DataFrame dates and Streamlit date_input values
+        # into the same Pandas Timestamp type before comparison.
+        start_date = pd.to_datetime(start_date)
+        end_date = pd.to_datetime(end_date)
+
+        filtered_df["date"] = pd.to_datetime(filtered_df["date"], errors="coerce")
+
         filtered_df = filtered_df[
-            (filtered_df["date"] >= start_date) & (filtered_df["date"] <= end_date)
+            (filtered_df["date"] >= start_date) &
+            (filtered_df["date"] <= end_date)
         ]
     
     # Filter insights corresponding to filtered rows
-    filtered_indices = set(filtered_df.index)
+    # Use feedback_id instead of list position because insights may be reordered
+    # after priority ranking.
+    filtered_feedback_ids = set(filtered_df["feedback_id"].tolist())
+
     filtered_insights = [
-        insight for idx, insight in enumerate(insights_list)
-        if idx in filtered_indices
+        insight for insight in insights_list
+        if insight.get("feedback_id") in filtered_feedback_ids
     ]
     
     return filtered_df, filtered_insights
