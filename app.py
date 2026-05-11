@@ -169,7 +169,10 @@ with st.sidebar:
         st.header("📈 Quick Stats")
         st.metric("Total Feedback", len(st.session_state.processed_df))
         st.metric("Critical Issues", st.session_state.metrics.get("critical_issues", 0))
-        st.metric("Unique Categories", st.session_state.metrics.get("total_feedback", 0))
+        st.metric(
+            "Unique Categories",
+            len(st.session_state.metrics.get("topic_distribution", {}))
+        )
 
 
 # ============================================================================
