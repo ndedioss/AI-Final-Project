@@ -21,50 +21,88 @@ def load_sentiment_model():
 
 def analyze_sentiment(text: str) -> Dict[str, any]:
     """
-    Analyze sentiment of feedback text.
-    
+    Analyze the sentiment of a student feedback text.
+
+    This function uses a DistilBERT sentiment-analysis model from HuggingFace.
+    The selected model is binary by default, meaning it mainly predicts either
+    POSITIVE or NEGATIVE. To support a simple prototype-level NEUTRAL label,
+    this function applies a confidence threshold:
+
+    - If the model confidence is below 0.70, the feedback is treated as NEUTRAL.
+    - If confidence is 0.70 or higher, the model's POSITIVE/NEGATIVE label is used.
+
     Args:
-        text: Student feedback text
-        
+        text: Student feedback text.
+
     Returns:
-        Dictionary with sentiment_label, confidence, and emotion_tags
+        A dictionary containing:
+        - sentiment_label: POSITIVE, NEGATIVE, or NEUTRAL
+        - confidence: model confidence score from 0.0 to 1.0
+        - emotion_tags: simple keyword-based emotion tags
     """
-    if not text or len(text.strip()) < 5:
+
+    # Handle empty, missing, or very short feedback.
+    # Very short feedback like "Good.", "Okay.", or "Bad." may show emotion,
+    # but it does not provide enough useful context for actionable analysis.
+    if not text:
         return {
             "sentiment_label": "NEUTRAL",
             "confidence": 0.0,
-            "emotion_tags": []
+            "emotion_tags": ["low_information"]
         }
-    
+
+    clean_text = str(text).strip()
+
+    if len(clean_text.split()) < 3:
+        return {
+            "sentiment_label": "NEUTRAL",
+            "confidence": 0.0,
+            "emotion_tags": ["low_information"]
+        }
+
     try:
+        # Load cached HuggingFace sentiment model.
         pipeline_model = load_sentiment_model()
-        result = pipeline_model(text[:512])[0]  # Truncate to 512 chars (model limit)
-        
-        label = result["label"]  # POSITIVE or NEGATIVE
-        score = result["score"]
-        
-        # Map to our labels
-        sentiment_label = "POSITIVE" if label == "POSITIVE" else "NEGATIVE"
-        
-        # Invert score if negative (HF gives higher score to detected label)
-        confidence = score if label == label else 1 - score
-        
-        # Infer emotion tags based on text keywords
-        emotion_tags = _extract_emotion_tags(text, sentiment_label)
-        
+
+        # Convert to string and limit input length.
+        # DistilBERT has a token limit, so this keeps processing safe for long feedback.    
+        result = pipeline_model(clean_text[:512])[0]
+
+        # HuggingFace output example:
+        # {"label": "POSITIVE", "score": 0.98}
+        raw_label = result.get("label", "NEUTRAL")
+        score = float(result.get("score", 0.0))
+
+        # Prototype neutral handling:
+        # Since the model is binary, low confidence predictions are treated as neutral.
+        neutral_threshold = 0.70
+
+        if score < neutral_threshold:
+            sentiment_label = "NEUTRAL"
+        elif raw_label == "POSITIVE":
+            sentiment_label = "POSITIVE"
+        elif raw_label == "NEGATIVE":
+            sentiment_label = "NEGATIVE"
+        else:
+            sentiment_label = "NEUTRAL"
+
+        # Infer emotion tags using keyword rules.
+        emotion_tags = _extract_emotion_tags(clean_text, sentiment_label)
+
         return {
             "sentiment_label": sentiment_label,
-            "confidence": round(confidence, 3),
+            "confidence": round(score, 3),
             "emotion_tags": emotion_tags
         }
+
     except Exception as e:
+        # Safe fallback so one failed prediction does not crash the whole app.
         print(f"Error analyzing sentiment: {e}")
         return {
             "sentiment_label": "NEUTRAL",
             "confidence": 0.0,
             "emotion_tags": ["error"]
         }
-
 
 def _extract_emotion_tags(text: str, sentiment: str) -> List[str]:
     """
